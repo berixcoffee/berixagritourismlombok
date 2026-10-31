@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Farm Agritourism & Coffee Experience - Lombok Utara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        farm: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        earth: {
+                            100: '#fef3c7',
+                            800: '#92400e',
+                            900: '#78350f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes sway {
+            0%, 100% { transform: rotate(-4deg); }
+            50% { transform: rotate(4deg); }
+        }
+        @keyframes floatCloud {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(calc(100vw + 150px)); }
+        }
+        @keyframes sunPulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+        .animate-sway { animation: sway 3.5s ease-in-out infinite; }
+        .cloud-1 { animation: floatCloud 28s linear infinite; }
+        .cloud-2 { animation: floatCloud 40s linear infinite 8s; }
+        .sun-glow { animation: sunPulse 4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-farm-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300 transform translate-y-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 bg-farm-600 rounded-2xl flex items-center justify-center text-white shadow-md shadow-farm-500/30 group-hover:bg-farm-700 transition-all">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-farm-900 block leading-tight">Fun Farm</span>
+                    <span class="text-xs font-medium text-farm-600 tracking-wider uppercase">Coffee & Agritourism</span>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-4 sm:gap-6">
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600">
+                    <a href="#hero" class="hover:text-farm-600 transition-colors" data-i18n="navHome">Beranda</a>
+                    <a href="#concept" class="hover:text-farm-600 transition-colors" data-i18n="navConcept">Alur Kunjungan</a>
+                    <a href="#crops" class="hover:text-farm-600 transition-colors" data-i18n="navCrops">Kebun Kami</a>
+                    <a href="#tickets" class="hover:text-farm-600 transition-colors" data-i18n="navTickets">Paket Wisata</a>
+                </nav>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center bg-stone-100 rounded-full p-1 border border-stone-200 text-xs font-semibold">
+                    <button onclick="setLanguage('id')" id="lang-id" class="px-2.5 py-1 rounded-full transition-all bg-farm-600 text-white shadow-sm">ID</button>
+                    <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1 rounded-full transition-all text-stone-600 hover:text-stone-900">EN</button>
+                </div>
+
+                <!-- Cart Button -->
+                <button onclick="toggleCart()" class="relative bg-farm-50 hover:bg-farm-100 text-farm-700 w-11 h-11 rounded-xl flex items-center justify-center transition-colors border border-farm-200">
+                    <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-rose-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md scale-0 transition-transform duration-300">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-28 pb-20 md:pt-36 md:pb-32 overflow-hidden bg-gradient-to-b from-farm-50 via-emerald-50/40 to-stone-50">
+        <div class="absolute top-12 left-0 w-32 h-12 bg-white/70 rounded-full blur-sm cloud-1 pointer-events-none"></div>
+        <div class="absolute top-28 left-0 w-44 h-16 bg-white/60 rounded-full blur-sm cloud-2 pointer-events-none"></div>
+        <div class="absolute top-16 right-10 sm:right-24 w-28 h-28 bg-amber-300/40 rounded-full blur-xl sun-glow pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-farm-100 text-farm-800 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6 border border-farm-200 shadow-sm">
+                        <i class="fa-solid fa-seedling text-farm-600"></i>
+                        <span data-i18n="heroBadge">Coffee Shop & Agro-Education Experience</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight leading-tight mb-6">
+                        <span data-i18n="heroTitle1">Mulai dari Secangkir Kopi, Lanjutkan ke</span> <span class="text-farm-600 underline decoration-farm-300 decoration-wavy decoration-2">Petualangan Kebun</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-stone-600 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed" data-i18n="heroDesc">
+                        Nikmati cita rasa kopi lokal terbaik di tempat kami, lalu nikmati pengalaman interaktif menjelajah kebun tropis, belajar bertani, dan memanen langsung hasil bumi Nusantara.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#tickets" class="w-full sm:w-auto bg-farm-600 hover:bg-farm-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg shadow-farm-600/30 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3">
+                            <span data-i18n="btnBookNow">Pilih Paket Wisata</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#concept" class="w-full sm:w-auto bg-white hover:bg-stone-100 text-stone-700 font-semibold px-8 py-4 rounded-2xl border border-stone-200 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-compass text-farm-600"></i>
+                            <span data-i18n="btnExplore">Alur Kunjungan</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 mt-12 pt-8 border-t border-stone-200 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-farm-700">6 Komoditas</div>
+                            <div class="text-xs sm:text-sm text-stone-500 font-medium" data-i18n="stat1">Kakao, Kopi, Durian & Lainnya</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-farm-700">100%</div>
+                            <div class="text-xs sm:text-sm text-stone-500 font-medium" data-i18n="stat2">Pengalaman Autentik</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-farm-700">5.0★</div>
+                            <div class="text-xs sm:text-sm text-stone-500 font-medium" data-i18n="stat3">Rating Turis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-full max-w-md aspect-square bg-gradient-to-tr from-amber-100 to-emerald-200/50 rounded-3xl p-8 shadow-inner flex flex-col justify-end overflow-hidden border border-farm-200">
+                        <div class="absolute top-6 left-8 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl shadow-sm text-xs font-bold text-farm-800 flex items-center gap-2 animate-bounce">
+                            <i class="fa-solid fa-mug-hot text-amber-600"></i> Fresh Coffee & Farm Tour
+                        </div>
+                        <div class="relative z-10 flex justify-center items-end gap-3 h-64">
+                            <div class="w-20 bg-stone-700/10 rounded-t-xl h-40 flex flex-col items-center justify-end pb-3 relative">
+                                <div class="absolute bottom-2 text-3xl animate-sway">☕</div>
+                                <div class="absolute -top-4 bg-white px-2 py-1 rounded-lg text-[10px] font-bold text-farm-700 shadow-sm">Kopi</div>
+                            </div>
+                            <div class="w-28 bg-stone-700/10 rounded-t-xl h-56 flex flex-col items-center justify-end pb-3 relative">
+                                <div class="absolute bottom-4 text-5xl animate-sway" style="animation-delay: 0.5s;">🥥🍌</div>
+                                <div class="absolute -top-4 bg-white px-2 py-1 rounded-lg text-[10px] font-bold text-farm-700 shadow-sm">Kebun Tropis</div>
+                            </div>
+                            <div class="w-20 bg-stone-700/10 rounded-t-xl h-44 flex flex-col items-center justify-end pb-3 relative">
+                                <div class="absolute bottom-3 text-3xl animate-sway" style="animation-delay: 1s;">🍫</div>
+                                <div class="absolute -top-4 bg-white px-2 py-1 rounded-lg text-[10px] font-bold text-farm-700 shadow-sm">Kakao</div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-earth-900 to-amber-900/80 rounded-b-3xl flex items-center justify-center">
+                            <span class="text-white/80 text-xs font-semibold tracking-wider uppercase" data-i18n="organicGround">Lombok Utara, NTB, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-farm-600 font-bold uppercase tracking-wider text-xs bg-farm-50 px-3 py-1 rounded-full border border-farm-200" data-i18n="conceptBadge">Alur Kunjungan Turis</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-3 mb-4" data-i18n="conceptTitle">Dari Secangkir Kopi Menuju Pengalaman Bertani</h2>
+                <p class="text-stone-600 text-base sm:text-lg" data-i18n="conceptDesc">Nikmati perjalanan wisata yang unik dan santai bagi wisatawan lokal maupun mancanegara.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-stone-50 p-8 rounded-3xl border border-stone-200 flex items-start gap-6 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-2xl font-bold shrink-0">
+                        <i class="fa-solid fa-mug-saucer"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-amber-700 uppercase tracking-wider" data-i18n="step1Tag">Langkah 01</span>
+                        <h3 class="text-xl font-bold text-stone-900 mt-1 mb-2" data-i18n="step1Title">Ngopi & Bersantai di Kafe</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed" data-i18n="step1Desc">
+                            Awali kunjungan Anda dengan menikmati seduhan kopi khas kebun kami atau racikan spesial ditemani suasana pedesaan yang asri dan udara segar.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 p-8 rounded-3xl border border-stone-200 flex items-start gap-6 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-farm-100 text-farm-700 rounded-2xl flex items-center justify-center text-2xl font-bold shrink-0">
+                        <i class="fa-solid fa-shoe-prints"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-farm-700 uppercase tracking-wider" data-i18n="step2Tag">Langkah 02</span>
+                        <h3 class="text-xl font-bold text-stone-900 mt-1 mb-2" data-i18n="step2Title">Eksplorasi & Edukasi Bertani</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed" data-i18n="step2Desc">
+                            Setelah menikmati kopi, mulailah berinteraksi langsung dengan alam. Tour guide kami akan mengajak Anda berjalan-jalan keliling kebun, melihat langsung proses budidaya tanaman organik.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crops Showcase Section -->
+    <section id="crops" class="py-20 bg-stone-100 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-farm-600 font-bold uppercase tracking-wider text-xs bg-farm-100 px-3 py-1 rounded-full border border-farm-200" data-i18n="cropsBadge">Tanaman di Kebun Kami</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-3 mb-4" data-i18n="cropsTitle">Kenali 6 Komoditas Unggulan Kami</h2>
+                <p class="text-stone-600 text-base sm:text-lg" data-i18n="cropsDesc">Pelajari dan rasakan langsung pengalaman merawat serta memanen tanaman tropis berkualitas tinggi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="text-4xl mb-4">☕</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-i18n="crop1Name">Kopi Lokal</h3>
+                    <p class="text-stone-600 text-sm" data-i18n="crop1Desc">Dari biji kopi pilihan hingga proses roasting dan seduhan nikmat langsung di tempat.</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="text-4xl mb-4">🍫</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-i18n="crop2Name">Kakao (Cokelat)</h3>
+                    <p class="text-stone-600 text-sm" data-i18n="crop2Desc">Melihat langsung pohon kakao, buahnya, hingga proses pengolahan biji cokelat.</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="text-4xl mb-4">🍈</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-i18n="crop3Name">Durian</h3>
+                    <p class="text-stone-600 text-sm" data-i18n="crop3Desc">Raja buah tropis dengan cita rasa manis legit khas perkebunan lokal.</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="text-4xl mb-4">🥥</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-i18n="crop4Name">Kelapa</h3>
+                    <p class="text-stone-600 text-sm" data-i18n="crop4Desc">Menikmati kesegaran air kelapa muda langsung dari pohonnya di tengah kebun.</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="text-4xl mb-4">🍌</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-i18n="crop5Name">Pisang</h3>
+                    <p class="text-stone-600 text-sm" data-i18n="crop5Desc">Berbagai varietas pisang lokal yang subur dan kaya manfaat.</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="text-4xl mb-4">🌿</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-i18n="crop6Name">Cengkeh</h3>
+                    <p class="text-stone-600 text-sm" data-i18n="crop6Desc">Mengenal aromatik rempah cengkeh berkualitas tinggi yang menjadi warisan rempah nusantara.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticket & Packages Section -->
+    <section id="tickets" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-farm-600 font-bold uppercase tracking-wider text-xs bg-farm-50 px-3 py-1 rounded-full border border-farm-200" data-i18n="ticketSub">Paket & Harga Spesial Turis</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-3 mb-4" data-i18n="ticketTitle">Pilih Pengalaman Wisata Anda</h2>
+                <p class="text-stone-600 text-base sm:text-lg" data-i18n="ticketDesc">Dari menikmati kopi hingga belajar praktik bertani langsung di kebun.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-stone-50 rounded-3xl p-8 border border-stone-200 hover:border-farm-400 hover:shadow-xl transition-all flex flex-col justify-between group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-farm-100 text-farm-800 text-xs font-bold px-4 py-1.5 rounded-bl-2xl">
+                        <span data-i18n="badgePopular">Favorit</span>
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 bg-farm-100 text-farm-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-farm-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-mug-saucer"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2" data-i18n="t1Name">Paket Ngopi & Santai Kebun</h3>
+                        <p class="text-stone-600 text-sm mb-6" data-i18n="t1Desc">Nikmati secangkir kopi segar di kafe kami dengan akses santai di area gazebo kebun.</p>
+                        
+                        <ul class="space-y-3 mb-8 text-sm text-stone-700">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t1f1">1x Cangkir Kopi / Signature Drink</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t1f2">Akses Area Kebun & Spot Foto</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t1f3">Peta Panduan Wisata</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline justify-between mb-4">
+                            <span class="text-xs text-stone-500 font-medium" data-i18n="pricePerPax">Harga per orang</span>
+                            <span class="text-2xl font-extrabold text-stone-900">Rp 45.000</span>
+                        </div>
+                        <button onclick="addToCart('Paket Ngopi & Santai Kebun', 45000, 'fa-mug-saucer')" class="w-full bg-stone-900 hover:bg-farm-600 text-white font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span data-i18n="btnAddCart">Tambah ke Keranjang</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-stone-50 rounded-3xl p-8 border border-stone-200 hover:border-farm-400 hover:shadow-xl transition-all flex flex-col justify-between group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-100 text-amber-800 text-xs font-bold px-4 py-1.5 rounded-bl-2xl">
+                        <span data-i18n="badgeBestValue">Rekomendasi Turis</span>
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2" data-i18n="t2Name">Tour & Petik Hasil Kebun</h3>
+                        <p class="text-stone-600 text-sm mb-6" data-i18n="t2Desc">Pengalaman lengkap menjelajah kebun kopi, kakao, pisang, kelapa, durian & cengkeh.</p>
+                        
+                        <ul class="space-y-3 mb-8 text-sm text-stone-700">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t2f1">Termasuk Minuman Kopi Selamat Datang</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t2f2">Didampingi Tour Guide Profesional</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t2f3">Bawa Pulang Hasil Panen (Pisang / Buah)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline justify-between mb-4">
+                            <span class="text-xs text-stone-500 font-medium" data-i18n="pricePerPax">Harga per orang</span>
+                            <span class="text-2xl font-extrabold text-stone-900">Rp 125.000</span>
+                        </div>
+                        <button onclick="addToCart('Tour & Petik Hasil Kebun', 125000, 'fa-basket-shopping')" class="w-full bg-farm-600 hover:bg-farm-700 text-white font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-farm-600/20">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span data-i18n="btnAddCart">Tambah ke Keranjang</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-stone-50 rounded-3xl p-8 border border-stone-200 hover:border-farm-400 hover:shadow-xl transition-all flex flex-col justify-between group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-100 text-blue-800 text-xs font-bold px-4 py-1.5 rounded-bl-2xl">
+                        <span data-i18n="badgeEdu">Edukasi Intensif</span>
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2" data-i18n="t3Name">Workshop & Praktik Bertani</h3>
+                        <p class="text-stone-600 text-sm mb-6" data-i18n="t3Desc">Belajar mendalam teknik pembibitan, perawatan kopi/kakao, hingga sesi seduh kopi khusus.</p>
+                        
+                        <ul class="space-y-3 mb-8 text-sm text-stone-700">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t3f1">Praktik Langsung Menanam/Grafting</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t3f2">Edukasi Pengolahan Kopi & Cokelat</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-farm-600"></i> <span data-i18n="t3f3">Sertifikat & Souvenir Biji Kopi / Bibit</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline justify-between mb-4">
+                            <span class="text-xs text-stone-500 font-medium" data-i18n="pricePerPax">Harga per orang</span>
+                            <span class="text-2xl font-extrabold text-stone-900">Rp 225.000</span>
+                        </div>
+                        <button onclick="addToCart('Workshop & Praktik Bertani', 225000, 'fa-graduation-cap')" class="w-full bg-stone-900 hover:bg-farm-600 text-white font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span data-i18n="btnAddCart">Tambah ke Keranjang</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-stone-900 text-stone-300 pt-16 pb-12 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-stone-800">
+                <div class="lg:col-span-5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-farm-600 rounded-xl flex items-center justify-center text-white shadow-md">
+                            <i class="fa-solid fa-mug-hot text-lg"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white tracking-tight">Fun Farm Agritourism & Coffee</span>
+                    </div>
+                    <p class="text-stone-400 text-sm mb-6 leading-relaxed" data-i18n="footerDesc">
+                        Destinasi wisata agrowisata dan kedai kopi terbaik di Lombok Utara, NTB. Awali hari Anda dengan kopi nikmat dan jelajahi kebun organik kami.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="https://www.instagram.com/kopiberik.leong" class="w-10 h-10 bg-stone-800 hover:bg-farm-600 text-white rounded-xl flex items-center justify-center transition-colors shadow-sm"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/kopileong.berik" class="w-10 h-10 bg-stone-800 hover:bg-farm-600 text-white rounded-xl flex items-center justify-center transition-colors shadow-sm"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://wa.me/6285158602227" target="_blank" class="w-10 h-10 bg-stone-800 hover:bg-farm-600 text-white rounded-xl flex items-center justify-center transition-colors shadow-sm"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h4 class="text-white font-bold text-base mb-4" data-i18n="footerNavTitle">Navigasi Cepat</h4>
+                    <ul class="space-y-2.5 text-sm text-stone-400">
+                        <li><a href="#hero" class="hover:text-farm-400 transition-colors" data-i18n="navHome">Beranda</a></li>
+                        <li><a href="#concept" class="hover:text-farm-400 transition-colors" data-i18n="navConcept">Alur Kunjungan</a></li>
+                        <li><a href="#crops" class="hover:text-farm-400 transition-colors" data-i18n="navCrops">Kebun Kami</a></li>
+                        <li><a href="#tickets" class="hover:text-farm-400 transition-colors" data-i18n="navTickets">Paket Wisata</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-4">
+                    <h4 class="text-white font-bold text-base mb-4" data-i18n="footerLocTitle">Lokasi</h4>
+                    <div class="bg-stone-800/80 p-4 rounded-2xl border border-stone-700 mb-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-farm-500 mt-1 text-lg"></i>
+                            <div>
+                                <p class="text-sm font-semibold text-white mb-1">Fun Farm Agritourism</p>
+                                <p class="text-xs text-stone-400 leading-relaxed" data-i18n="fullAddress">
+                                    Kabupaten Lombok Utara, Nusa Tenggara Barat (NTB), Indonesia
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500">
+                <p>&copy; 2026 Fun Farm Agritourism. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-end transition-opacity">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform transition-transform translate-x-full duration-300" id="cart-drawer">
+            <div class="p-6 border-b border-stone-200 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-farm-100 text-farm-700 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-stone-900" data-i18n="cartTitle">Keranjang Paket</h3>
+                        <p class="text-xs text-stone-500" data-i18n="cartSub">Ringkasan pemesanan Anda</p>
+                    </div>
+                </div>
+                <button onclick="toggleCart()" class="w-9 h-9 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="p-6 flex-1 overflow-y-auto space-y-4">
+                <div id="empty-cart-message" class="text-center py-16 text-stone-400">
+                    <i class="fa-solid fa-basket-shopping text-5xl mb-3 text-stone-300"></i>
+                    <p class="text-sm font-medium" data-i18n="emptyCart">Keranjang Anda masih kosong</p>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-stone-200 bg-stone-50">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-medium text-stone-600" data-i18n="totalLabel">Total Pembayaran:</span>
+                    <span id="cart-total" class="text-2xl font-extrabold text-stone-900">Rp 0</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" id="checkout-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 rounded-xl transition-all shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span data-i18n="btnCheckoutWA">Booking via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-stone-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-farm-500 text-lg"></i>
+        <span id="toast-msg" class="text-sm font-medium">Paket berhasil ditambahkan!</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Ganti nomor WhatsApp di bawah ini dengan nomor bos (gunakan awalan 62 tanpa angka 0 di depan)
+        const WHATSAPP_NUMBER = "6285158602227";
+
+        const translations = {
+            id: {
+                navHome: "Beranda",
+                navConcept: "Alur Kunjungan",
+                navCrops: "Kebun Kami",
+                navTickets: "Paket Wisata",
+                heroBadge: "Coffee Shop & Agro-Education Experience",
+                heroTitle1: "Mulai dari Secangkir Kopi, Lanjutkan ke",
+                heroDesc: "Nikmati cita rasa kopi lokal terbaik di tempat kami, lalu nikmati pengalaman interaktif menjelajah kebun tropis, belajar bertani, dan memanen langsung hasil bumi Nusantara.",
+                btnBookNow: "Pilih Paket Wisata",
+                btnExplore: "Alur Kunjungan",
+                stat1: "Kakao, Kopi, Durian & Lainnya",
+                stat2: "Pengalaman Autentik",
+                stat3: "Rating Turis",
+                organicGround: "Lombok Utara, NTB, Indonesia",
+                conceptBadge: "Alur Kunjungan Turis",
+                conceptTitle: "Dari Secangkir Kopi Menuju Pengalaman Bertani",
+                conceptDesc: "Nikmati perjalanan wisata yang unik dan santai bagi wisatawan lokal maupun mancanegara.",
+                step1Tag: "Langkah 01",
+                step1Title: "Ngopi & Bersantai di Kafe",
+                step1Desc: "Awali kunjungan Anda dengan menikmati seduhan kopi khas kebun kami atau racikan spesial ditemani suasana pedesaan yang asri dan udara segar.",
+                step2Tag: "Langkah 02",
+                step2Title: "Eksplorasi & Edukasi Bertani",
+                step2Desc: "Setelah menikmati kopi, mulailah berinteraksi langsung dengan alam. Tour guide kami akan mengajak Anda berjalan-jalan keliling kebun dan melihat budidaya tanaman.",
+                cropsBadge: "Tanaman di Kebun Kami",
+                cropsTitle: "Kenali 6 Komoditas Unggulan Kami",
+                cropsDesc: "Pelajari dan rasakan langsung pengalaman merawat serta memanen tanaman tropis berkualitas tinggi.",
+                crop1Name: "Kopi Lokal",
+                crop1Desc: "Dari biji kopi pilihan hingga proses roasting dan seduhan nikmat langsung di tempat.",
+                crop2Name: "Kakao (Cokelat)",
+                crop2Desc: "Melihat langsung pohon kakao, buahnya, hingga proses pengolahan biji cokelat.",
+                crop3Name: "Durian",
+                crop3Desc: "Raja buah tropis dengan cita rasa manis legit khas perkebunan lokal.",
+                crop4Name: "Kelapa",
+                crop4Desc: "Menikmati kesegaran air kelapa muda langsung dari pohonnya di tengah kebun.",
+                crop5Name: "Pisang",
+                crop5Desc: "Berbagai varietas pisang lokal yang subur dan kaya manfaat.",
+                crop6Name: "Cengkeh",
+                crop6Desc: "Mengenal aromatik rempah cengkeh berkualitas tinggi yang menjadi warisan rempah nusantara.",
+                ticketSub: "Paket & Harga Spesial Turis",
+                ticketTitle: "Pilih Pengalaman Wisata Anda",
+                ticketDesc: "Dari menikmati kopi hingga belajar praktik bertani langsung di kebun.",
+                badgePopular: "Favorit",
+                badgeBestValue: "Rekomendasi Turis",
+                badgeEdu: "Edukasi Intensif",
+                t1Name: "Paket Ngopi & Santai Kebun",
+                t1Desc: "Nikmati secangkir kopi segar di kafe kami dengan akses santai di area gazebo kebun.",
+                t1f1: "1x Cangkir Kopi / Signature Drink",
+                t1f2: "Akses Area Kebun & Spot Foto",
+                t1f3: "Peta Panduan Wisata",
+                t2Name: "Tour & Petik Hasil Kebun",
+                t2Desc: "Pengalaman lengkap menjelajah kebun kopi, kakao, pisang, kelapa, durian & cengkeh.",
+                t2f1: "Termasuk Minuman Kopi Selamat Datang",
+                t2f2: "Didampingi Tour Guide Profesional",
+                t2f3: "Bawa Pulang Hasil Panen (Pisang / Buah)",
+                t3Name: "Workshop & Praktik Bertani",
+                t3Desc: "Belajar mendalam teknik pembibitan, perawatan kopi/kakao, hingga sesi seduh kopi khusus.",
+                t3f1: "Praktik Langsung Menanam/Grafting",
+                t3f2: "Edukasi Pengolahan Kopi & Cokelat",
+                t3f3: "Sertifikat & Souvenir Biji Kopi / Bibit",
+                pricePerPax: "Harga per orang",
+                btnAddCart: "Tambah ke Keranjang",
+                footerDesc: "Destinasi wisata agrowisata dan kedai kopi terbaik di Lombok Utara, NTB. Awali hari Anda dengan kopi nikmat dan jelajahi kebun organik kami.",
+                footerNavTitle: "Navigasi Cepat",
+                footerLocTitle: "Lokasi",
+                fullAddress: "Kabupaten Lombok Utara, Nusa Tenggara Barat (NTB), Indonesia",
+                cartTitle: "Keranjang Paket",
+                cartSub: "Ringkasan pemesanan Anda",
+                emptyCart: "Keranjang Anda masih kosong",
+                totalLabel: "Total Pembayaran:",
+                btnCheckoutWA: "Booking via WhatsApp"
+            },
+            en: {
+                navHome: "Home",
+                navConcept: "Visitor Flow",
+                navCrops: "Our Crops",
+                navTickets: "Packages",
+                heroBadge: "Coffee Shop & Agro-Education Experience",
+                heroTitle1: "Start with Coffee, Continue to",
+                heroDesc: "Enjoy the finest local coffee at our cafe, then embark on an interactive tropical garden adventure, learn farming, and harvest directly from nature.",
+                btnBookNow: "Select Packages",
+                btnExplore: "Visitor Flow",
+                stat1: "Cocoa, Coffee, Durian & More",
+                stat2: "Authentic Experience",
+                stat3: "Tourist Rating",
+                organicGround: "North Lombok, NTB, Indonesia",
+                conceptBadge: "Tourist Journey",
+                conceptTitle: "From a Cup of Coffee to Farming Experience",
+                conceptDesc: "Enjoy a unique and relaxing tour experience for both local and international travelers.",
+                step1Tag: "Step 01",
+                step1Title: "Coffee & Relax at the Cafe",
+                step1Desc: "Start your visit by enjoying a fresh brew of our signature garden coffee surrounded by lush countryside scenery and fresh air.",
+                step2Tag: "Step 02",
+                step2Title: "Garden Exploration & Farming",
+                step2Desc: "After coffee, engage directly with nature. Our tour guide will walk you through the plantation to witness organic farming in action.",
+                cropsBadge: "Crops in Our Garden",
+                cropsTitle: "Meet Our 6 Featured Commodities",
+                cropsDesc: "Learn and experience firsthand how we cultivate and harvest premium tropical plants.",
+                crop1Name: "Local Coffee",
+                crop1Desc: "From selected coffee beans to roasting processes and fresh brewing on-site.",
+                crop2Name: "Cocoa (Chocolate)",
+                crop2Desc: "Discover cocoa trees, pods, and the traditional chocolate bean processing journey.",
+                crop3Name: "Durian",
+                crop3Desc: "The king of tropical fruits with sweet, rich flavors from local orchards.",
+                crop4Name: "Coconut",
+                crop4Desc: "Enjoy refreshing fresh coconut water straight from the tree.",
+                crop5Name: "Banana",
+                crop5Desc: "Various thriving local banana varieties rich in nutrients.",
+                crop6Name: "Clove",
+                crop6Desc: "Explore high-quality aromatic cloves as part of Indonesia's spice heritage.",
+                ticketSub: "Tourist Packages & Special Rates",
+                ticketTitle: "Choose Your Farming Experience",
+                ticketDesc: "From savoring coffee to hands-on agricultural learning in the garden.",
+                badgePopular: "Favorite",
+                badgeBestValue: "Tourist Pick",
+                badgeEdu: "Intensive Edu",
+                t1Name: "Coffee & Garden Stroll",
+                t1Desc: "Enjoy a fresh cup of coffee at our cafe with relaxing access to the garden gazebos.",
+                t1f1: "1x Cup of Coffee / Signature Drink",
+                t1f2: "Garden & Photo Spot Access",
+                t1f3: "Tour Guide Map",
+                t2Name: "Tour & Fruit/Crop Picking",
+                t2Desc: "Complete exploration of coffee, cocoa, banana, coconut, durian & clove gardens.",
+                t2f1: "Includes Welcome Coffee Drink",
+                t2f2: "Accompanied by Professional Tour Guide",
+                t2f3: "Take Home Harvest (Banana / Fruit)",
+                t3Name: "Workshop & Farming Practice",
+                t3Desc: "In-depth learning on seedling techniques, coffee/cocoa care, and special coffee brewing.",
+                t3f1: "Hands-on Planting & Grafting Practice",
+                t3f2: "Coffee & Chocolate Processing Education",
+                t3f3: "Certificate & Coffee Beans / Seed Souvenir",
+                pricePerPax: "Price per person",
+                btnAddCart: "Add to Cart",
+                footerDesc: "The premier agritourism destination and coffee shop in North Lombok, NTB. Start your day with great coffee and explore our organic farm.",
+                footerNavTitle: "Quick Navigation",
+                footerLocTitle: "Location",
+                fullAddress: "North Lombok Regency, West Nusa Tenggara (NTB), Indonesia",
+                cartTitle: "Package Cart",
+                cartSub: "Your booking summary",
+                emptyCart: "Your cart is still empty",
+                totalLabel: "Total Payment:",
+                btnCheckoutWA: "Book via WhatsApp"
+            }
+        };
+
+        let currentLang = 'id';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('lang-id').className = lang === 'id' ? 'px-2.5 py-1 rounded-full transition-all bg-farm-600 text-white shadow-sm' : 'px-2.5 py-1 rounded-full transition-all text-stone-600 hover:text-stone-900';
+            document.getElementById('lang-en').className = lang === 'en' ? 'px-2.5 py-1 rounded-full transition-all bg-farm-600 text-white shadow-sm' : 'px-2.5 py-1 rounded-full transition-all text-stone-600 hover:text-stone-900';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+            document.documentElement.setAttribute('lang', lang);
+        }
+
+        let lastScrollTop = 0;
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 120) {
+                header.classList.add('-translate-y-full');
+            } else {
+                header.classList.remove('-translate-y-full');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+
+        let cart = [];
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            const drawer = document.getElementById('cart-drawer');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
+            } else {
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function addToCart(name, price, icon) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ name, price, icon, qty: 1 });
+            }
+            updateCartUI();
+            showToast(currentLang === 'id' ? 'Paket berhasil ditambahkan ke keranjang!' : 'Package successfully added to cart!');
+        }
+
+        function updateQuantity(name, change) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            let totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
+            let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+            if (totalItems > 0) {
+                badge.innerText = totalItems;
+                badge.classList.remove('scale-0');
+            } else {
+                badge.classList.add('scale-0');
+            }
+
+            totalEl.innerText = 'Rp ' + totalPrice.toLocaleString('id-ID');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-stone-400">
+                        <i class="fa-solid fa-basket-shopping text-5xl mb-3 text-stone-300"></i>
+                        <p class="text-sm font-medium">${currentLang === 'id' ? 'Keranjang Anda masih kosong' : 'Your cart is still empty'}</p>
+                    </div>
+                `;
+                checkoutBtn.disabled = true;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between bg-stone-50 p-4 rounded-2xl border border-stone-200">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-farm-100 text-farm-600 rounded-xl flex items-center justify-center">
+                                <i class="fa-solid ${item.icon}"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-stone-900">${item.name}</h4>
+                                <p class="text-xs text-stone-500">Rp ${item.price.toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button onclick="updateQuantity('${item.name}', -1)" class="w-7 h-7 bg-white border border-stone-200 rounded-lg flex items-center justify-center text-stone-600 hover:bg-stone-100">-</button>
+                            <span class="text-sm font-bold">${item.qty}</span>
+                            <button onclick="updateQuantity('${item.name}', 1)" class="w-7 h-7 bg-white border border-stone-200 rounded-lg flex items-center justify-center text-stone-600 hover:bg-stone-100">+</button>
+                        </div>
+                    </div>
+                `).join('');
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        // --- FITUR CHECKOUT OTOMATIS KE WHATSAPP ---
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return;
+
+            let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            
+            let message = "";
+            if (currentLang === 'id') {
+                message = `Halo Fun Farm Agritourism, saya ingin melakukan pemesanan paket wisata:\n\n`;
+                cart.forEach((item, index) => {
+                    message += `${index + 1}. *${item.name}* (${item.qty}x) - Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`;
+                });
+                message += `\n*Total Pembayaran: Rp ${totalPrice.toLocaleString('id-ID')}*`;
+                message += `\n\nMohon informasi langkah selanjutnya untuk konfirmasi kedatangan. Terima kasih!`;
+            } else {
+                message = `Hello Fun Farm Agritourism, I would like to book the following tour packages:\n\n`;
+                cart.forEach((item, index) => {
+                    message += `${index + 1}. *${item.name}* (${item.qty}x) - Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`;
+                });
+                message += `\n*Total Payment: Rp ${totalPrice.toLocaleString('id-ID')}*`;
+                message += `\n\nPlease let me know the next steps for confirmation. Thank you!`;
+            }
+
+            // Encode pesan agar aman untuk URL WhatsApp
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+            // Buka WhatsApp di tab baru
+            window.open(whatsappURL, '_blank');
+
+            // Reset keranjang setelah diklik
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.innerText = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
